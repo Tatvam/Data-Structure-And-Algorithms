@@ -1,5 +1,5 @@
 /*
- the update operation used is adding a given value to each element in the range [l,r]
+ update operation used is adding a given value to each element in the range [l,r]
 */
 #include <iostream>
 #include <climits>

@@ -15,7 +15,6 @@ typedef pair<ll,ll> pll;
 #define rep(i,a,b) for(int i = (a); i <= (b); i++)
 #define ren(i,a,b) for(int i = (a); i >= (b); i--)
 #define turbo ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0)
-#define MOD 1000000007
 #define PI 3.1415926535897932384626433832795
 #define MAX 100001
 #define INF (1<<20)
