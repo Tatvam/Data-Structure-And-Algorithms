@@ -25,110 +25,47 @@ typedef pair<ll,ll> pll;
 #define pi(x) printf("%d\n",x)
 #define pl(x) printf("%lld\n",x)
 #define ps(s) printf("%s\n",s)
-// DFS
-/*
-    vector<int> adj[100000];
-    vector<bool> visited(100000);
- dfs(int s,vector<bool> &visited)
-{
-    visited[s]=true;
-    for(int i=0;i<adj[s].size();i++)
-    {
-        if(visited[adj[s][i]]==false)
-        dfs(adj[s][i],visited);
-    }
-}
-*/
-
-// BFS
-/*
-    void bfs(int s,vector<int> &level)
-{
-    queue<int> q;
-    q.push(s);
-    level[s]=1;
-    visited[s]=true;
-    while(!q.empty())
-     {
-       int p=q.front();
-       q.pop();
-       for(int i=0;i<adj[p].size();i++)
-        {
-          if(visited[adj[p][i]]==false)
-         {
-
-              q.push(adj[p][i]);
-              level[adj[p][i]]=level[p]+1;
-              visited[adj[p][i]]=true;
-          }
-        }
-      }
-}
-*/
-// Binary Search
-/*
-int Binarysearch(vector<int> a,int n,int key)
-{
-    int low,high,mid;
-    low=0;
-    high=n-1;
-    
-    while(low<=high)
-    {
-        mid=(low+high)/2;
-        if(key==a[mid])
-            return(mid);
-        else
-            if(key>a[mid])
-                low=mid+1;
-            else
-                high=mid-1;
-    }
-    
-    return -1;
-}
-*/
-// DSU
-/*
-struct Node{
-    int parent;
-    int rank;
+struct node{
+    int key;
+    node* left;
+    node* right;
 };
 
-Node DSU[1001];
-void union(){
-    int a,b;
-            cin>>a>>b;
-            int x = root(a);
-            int y = root(b);
-            if(x == y)continue;
-            else if(DSU[x].rank > DSU[y].rank){
-                DSU[y].parent = x;
-            }
-            else if(DSU[x].rank < DSU[y].rank){
-                DSU[x].parent = y;
-            }
-            else{
-                DSU[x].parent = y;
-                DSU[y].rank++;
-            }
-}
-void makeset(int i){
-    DSU[i].parent = i;
-    DSU[i].rank = 0;
+typedef struct node node;
+
+node* newnode(int key){
+        node* temp = new node;
+        temp->key = key;
+        temp->left = NULL;
+        temp->right = NULL;
 }
 
-int root(int x){
-    while(DSU[x].parent != x){
-        DSU[x].parent = DSU[DSU[x].parent].parent;
-        x = DSU[x].parent;
+int ans=0;
+
+int diameter(node* root){
+    if(root == NULL){
+        return 0;
     }
-    return x;
+
+    int left_height = diameter(root->left);
+    int right_height = diameter(root->right);
+
+    ans = max(ans,1+left_height+right_height);
+
+    return 1 + max(left_height,right_height);
 }
-bool issame(int x,int y){
-    if(root(x)==root(y)){return true;}
-    return false;
-}
-*/
+
 int main(){
+
+    node * root = newnode(1);
+    root->left = newnode(2);
+    root->right = newnode(3);
+    root->left->left = newnode(4);
+    root->left->right = newnode(5);
+    root->right->left = newnode(6);
+    root->right->right = newnode(7);
+    root->left->right->left = newnode(8);
+    root->left->right->right = newnode(9);
+    diameter(root);
+    cout<<ans<<endl;
 }
