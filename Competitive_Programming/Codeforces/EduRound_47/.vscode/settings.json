@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "fstream": "c",
+        "thread": "c",
+        "*.tcc": "c",
+        "string_view": "c"
+    }
+}
